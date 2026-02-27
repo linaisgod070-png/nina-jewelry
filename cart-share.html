@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shopping Cart - NinaJewelryUSA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fafafa;color:#333;line-height:1.6}
+.header{background:#1a1a2e;padding:1.5rem 2rem;text-align:center;color:#fff}
+.header h1{font-size:1.5rem;font-weight:700}
+.header h1 span{color:#c9a96e}
+.header p{opacity:.8;font-size:.9rem;margin-top:.3rem}
+.container{max-width:700px;margin:0 auto;padding:1.5rem}
+.cart-item{display:flex;gap:1rem;background:#fff;border-radius:12px;padding:1rem;margin-bottom:1rem;box-shadow:0 2px 10px rgba(0,0,0,.06);align-items:center}
+.cart-item img{width:100px;height:100px;object-fit:cover;border-radius:8px;flex-shrink:0}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-num{font-size:.75rem;color:#c9a96e;font-weight:700;margin-bottom:.2rem}
+.cart-item-title{font-size:.95rem;font-weight:600;line-height:1.4}
+.cart-item-id{font-size:.7rem;color:#999;margin-top:.3rem}
+.summary{background:#1a1a2e;color:#fff;border-radius:12px;padding:1.5rem;text-align:center;margin-top:1.5rem}
+.summary h2{font-size:1.2rem;margin-bottom:.5rem;color:#c9a96e}
+.summary p{font-size:.9rem;opacity:.8}
+.wa-order{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:.75rem 2rem;border-radius:50px;font-size:1rem;font-weight:600;margin-top:1rem;text-decoration:none;transition:all .2s}
+.wa-order:hover{background:#1da851;transform:translateY(-2px)}
+.empty{text-align:center;padding:3rem;color:#999}
+.back{display:inline-block;margin-top:1rem;color:#c9a96e;font-size:.9rem;text-decoration:none}
+.back:hover{text-decoration:underline}
+@media(max-width:600px){
+.cart-item img{width:75px;height:75px}
+.cart-item-title{font-size:.85rem}
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Nina<span>Jewelry</span>USA</h1>
+<p>🛒 Shopping Cart</p>
+</div>
+<div class="container" id="content">
+<div class="empty">Loading cart...</div>
+</div>
+<script>
+try{
+var params=new URLSearchParams(window.location.search);
+var data=params.get('d');
+if(!data)throw 'no data';
+var items=JSON.parse(decodeURIComponent(escape(atob(data))));
+if(!items.length)throw 'empty';
+var h='';
+items.forEach(function(item,i){
+h+='<div class="cart-item">';
+h+='<img src="'+item.thumb+'" alt="">';
+h+='<div class="cart-item-info">';
+h+='<div class="cart-item-num">#'+(i+1)+'</div>';
+h+='<div class="cart-item-title">'+item.title+'</div>';
+h+='<div class="cart-item-id">ID: '+item.id.substring(0,16)+'</div>';
+h+='</div></div>';
+});
+h+='<div class="summary">';
+h+='<h2>'+items.length+' Items Selected</h2>';
+h+='<p>Contact us to place your order</p>';
+h+='<a href="https://wa.me/8613928692115" class="wa-order" target="_blank">💬 Chat on WhatsApp</a>';
+h+='<br><a href="index.html" class="back">← Continue Shopping</a>';
+h+='</div>';
+document.getElementById('content').innerHTML=h;
+}catch(e){
+document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><a href="index.html" class="back">← Go to Shop</a></div>';
+}
+</script>
+</body>
+</html>
