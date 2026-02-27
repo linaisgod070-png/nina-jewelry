@@ -42,19 +42,25 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fafaf
 </div>
 <script>
 try{
-var params=new URLSearchParams(window.location.search);
-var data=params.get('d');
-if(!data)throw 'no data';
-var items=JSON.parse(decodeURIComponent(escape(atob(data))));
-if(!items.length)throw 'empty';
+var hash=window.location.hash.substring(1);
+if(!hash)throw 'no data';
+// URL-safe base64 decode: replace - with +, _ with /, add padding
+var b64=hash.replace(/-/g,'+').replace(/_/g,'/');
+while(b64.length%4)b64+='=';
+var json=decodeURIComponent(escape(atob(b64)));
+var items=JSON.parse(json);
+if(!items||!items.length)throw 'empty';
 var h='';
 items.forEach(function(item,i){
+var title=item.title||'Product';
+var thumb=item.thumb||'';
+var id=item.id||'';
 h+='<div class="cart-item">';
-h+='<img src="'+item.thumb+'" alt="">';
+if(thumb)h+='<img src="'+thumb+'" alt="">';
 h+='<div class="cart-item-info">';
 h+='<div class="cart-item-num">#'+(i+1)+'</div>';
-h+='<div class="cart-item-title">'+item.title+'</div>';
-h+='<div class="cart-item-id">ID: '+item.id.substring(0,16)+'</div>';
+h+='<div class="cart-item-title">'+title+'</div>';
+if(id)h+='<div class="cart-item-id">ID: '+id.substring(0,16)+'</div>';
 h+='</div></div>';
 });
 h+='<div class="summary">';
