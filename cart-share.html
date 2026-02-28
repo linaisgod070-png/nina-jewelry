@@ -70,7 +70,7 @@ h+='<br><a href="index.html" class="back">Continue Shopping →</a>';
 h+='</div>';
 document.getElementById('content').innerHTML=h;
 }catch(e){
-document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><br><a href="index.html">← Go to Shop</a></div>';
+document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><br><small style="color:#ccc;word-break:break-all">Debug: hash='+hash.substring(0,50)+'... err='+e+'</small><br><br><a href="index.html">← Go to Shop</a></div>';
 }
 </script>
 </body>
