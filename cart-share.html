@@ -3,75 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shopping Cart - NinaJewelryUSA</title>
+<title>Order - NinaJewelryUSA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fafafa;color:#333;line-height:1.6}
-.header{background:#1a1a2e;padding:1.5rem 2rem;text-align:center;color:#fff}
-.header h1{font-size:1.5rem;font-weight:700}
-.header h1 span{color:#c9a96e}
-.header p{opacity:.8;font-size:.9rem;margin-top:.3rem}
-.container{max-width:700px;margin:0 auto;padding:1.5rem}
-.cart-item{display:flex;gap:1rem;background:#fff;border-radius:12px;padding:1rem;margin-bottom:1rem;box-shadow:0 2px 10px rgba(0,0,0,.06);align-items:center}
-.cart-item img{width:100px;height:100px;object-fit:cover;border-radius:8px;flex-shrink:0}
-.cart-item-info{flex:1;min-width:0}
-.cart-item-num{font-size:.75rem;color:#c9a96e;font-weight:700;margin-bottom:.2rem}
-.cart-item-title{font-size:.95rem;font-weight:600;line-height:1.4}
-.cart-item-id{font-size:.7rem;color:#999;margin-top:.3rem}
-.summary{background:#1a1a2e;color:#fff;border-radius:12px;padding:1.5rem;text-align:center;margin-top:1.5rem}
-.summary h2{font-size:1.2rem;margin-bottom:.5rem;color:#c9a96e}
-.summary p{font-size:.9rem;opacity:.8}
-.wa-order{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:.75rem 2rem;border-radius:50px;font-size:1rem;font-weight:600;margin-top:1rem;text-decoration:none;transition:all .2s}
-.wa-order:hover{background:#1da851;transform:translateY(-2px)}
-.empty{text-align:center;padding:3rem;color:#999}
-.back{display:inline-block;margin-top:1rem;color:#c9a96e;font-size:.9rem;text-decoration:none}
+:root{--primary:#0a0a0a;--gold:#b8977e;--gold-light:#d4b9a0;--bg:#faf8f5;--border:#e8e2dc;--text:#1a1a1a;--text-light:#8a8a8a}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased}
+.header{background:var(--primary);padding:3rem 2rem;text-align:center;color:#fff;position:relative}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent)}
+.header h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;letter-spacing:3px}
+.header h1 span{color:var(--gold-light)}
+.header p{font-family:'Cormorant Garamond',serif;opacity:.6;font-size:1rem;margin-top:.5rem;letter-spacing:2px;font-weight:300}
+.container{max-width:600px;margin:0 auto;padding:2rem 1.5rem}
+.order-item{display:flex;align-items:center;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border)}
+.order-item:last-of-type{border-bottom:none}
+.order-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);font-weight:500;min-width:32px}
+.order-info{flex:1}
+.order-title{font-size:.9rem;font-weight:400;letter-spacing:.3px}
+.order-qty{font-size:.75rem;color:var(--text-light);margin-top:.2rem}
+.summary{background:var(--primary);color:#fff;border-radius:8px;padding:2rem;text-align:center;margin-top:2rem}
+.summary h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.5rem;color:var(--gold-light);letter-spacing:2px}
+.summary p{font-size:.85rem;opacity:.6;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
+.wa-order{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:.75rem 2.5rem;border-radius:50px;font-size:.8rem;font-weight:500;margin-top:1.5rem;text-decoration:none;transition:all .3s;letter-spacing:1px;text-transform:uppercase;font-family:'Inter',sans-serif}
+.wa-order:hover{background:var(--gold-light);transform:translateY(-2px)}
+.back{display:inline-block;margin-top:1.2rem;color:var(--gold);font-size:.8rem;text-decoration:none;letter-spacing:1px}
 .back:hover{text-decoration:underline}
-@media(max-width:600px){
-.cart-item img{width:75px;height:75px}
-.cart-item-title{font-size:.85rem}
-}
+.empty{text-align:center;padding:4rem 2rem;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:1px}
+.empty a{color:var(--gold);text-decoration:none}
+.empty a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
 <div class="header">
 <h1>Nina<span>Jewelry</span>USA</h1>
-<p>🛒 Shopping Cart</p>
+<p>Order Summary</p>
 </div>
 <div class="container" id="content">
-<div class="empty">Loading cart...</div>
+<div class="empty">Loading...</div>
 </div>
 <script>
 try{
 var hash=window.location.hash.substring(1);
 if(!hash)throw 'no data';
-// URL-safe base64 decode: replace - with +, _ with /, add padding
 var b64=hash.replace(/-/g,'+').replace(/_/g,'/');
 while(b64.length%4)b64+='=';
 var json=decodeURIComponent(escape(atob(b64)));
 var items=JSON.parse(json);
 if(!items||!items.length)throw 'empty';
 var h='';
-var totalQty=items.reduce(function(s,x){return s+(x.q||1)},0);
+var totalQty=items.reduce(function(s,x){return s+(x.q||x.qty||1)},0);
 items.forEach(function(item,i){
 var title=item.t||item.title||'Product';
-var thumb=item.p||item.thumb||'';
 var q=item.q||item.qty||1;
-h+='<div class="cart-item">';
-if(thumb)h+='<img src="'+thumb+'" alt="">';
-h+='<div class="cart-item-info">';
-h+='<div class="cart-item-num">#'+(i+1)+(q>1?' × '+q:'')+'</div>';
-h+='<div class="cart-item-title">'+title+'</div>';
+h+='<div class="order-item">';
+h+='<div class="order-num">'+(i+1)+'</div>';
+h+='<div class="order-info">';
+h+='<div class="order-title">'+title+'</div>';
+if(q>1)h+='<div class="order-qty">Qty: '+q+'</div>';
 h+='</div></div>';
 });
 h+='<div class="summary">';
-h+='<h2>'+totalQty+' Items Selected</h2>';
+h+='<h2>'+totalQty+' Item'+(totalQty>1?'s':'')+' Selected</h2>';
 h+='<p>Contact us to place your order</p>';
-h+='<a href="https://wa.me/8613928692115" class="wa-order" target="_blank">💬 Chat on WhatsApp</a>';
-h+='<br><a href="index.html" class="back">← Continue Shopping</a>';
+h+='<a href="https://wa.me/8613928692115" class="wa-order" target="_blank">Chat on WhatsApp</a>';
+h+='<br><a href="index.html" class="back">Continue Shopping →</a>';
 h+='</div>';
 document.getElementById('content').innerHTML=h;
 }catch(e){
-document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><a href="index.html" class="back">← Go to Shop</a></div>';
+document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><br><a href="index.html">← Go to Shop</a></div>';
 }
 </script>
 </body>
