@@ -15,11 +15,11 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .header h1 span{color:var(--gold-light)}
 .header p{font-family:'Cormorant Garamond',serif;opacity:.6;font-size:1rem;margin-top:.5rem;letter-spacing:2px;font-weight:300}
 .container{max-width:600px;margin:0 auto;padding:2rem 1.5rem}
-.order-item{display:flex;align-items:center;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border)}
-.order-item:last-of-type{border-bottom:none}
-.order-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);font-weight:500;min-width:32px}
+.order-item{display:flex;align-items:center;gap:1rem;padding:1rem;margin-bottom:.75rem;background:#fff;border-radius:10px;border:1px solid var(--border)}
+.order-num{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);font-weight:500;min-width:28px}
+.order-img{width:70px;height:70px;object-fit:cover;border-radius:8px;flex-shrink:0}
 .order-info{flex:1}
-.order-title{font-size:.9rem;font-weight:400;letter-spacing:.3px}
+.order-title{font-size:.88rem;font-weight:400;letter-spacing:.3px}
 .order-qty{font-size:.75rem;color:var(--text-light);margin-top:.2rem}
 .summary{background:var(--primary);color:#fff;border-radius:8px;padding:2rem;text-align:center;margin-top:2rem}
 .summary h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.5rem;color:var(--gold-light);letter-spacing:2px}
@@ -31,6 +31,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .empty{text-align:center;padding:4rem 2rem;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:1px}
 .empty a{color:var(--gold);text-decoration:none}
 .empty a:hover{text-decoration:underline}
+@media(max-width:600px){.order-img{width:56px;height:56px}.order-title{font-size:.82rem}}
 </style>
 </head>
 <body>
@@ -51,12 +52,17 @@ var json=decodeURIComponent(escape(atob(b64)));
 var items=JSON.parse(json);
 if(!items||!items.length)throw 'empty';
 var h='';
+var pfx='https://xcimg.szwego.com/';
+var sfx='?imageMogr2/auto-orient/thumbnail/!320x320r/quality/100/format/jpg';
 var totalQty=items.reduce(function(s,x){return s+(x.q||x.qty||1)},0);
 items.forEach(function(item,i){
 var title=item.t||item.title||'Product';
+var thumb=item.p||item.thumb||'';
+if(thumb&&thumb.indexOf('http')!==0)thumb=pfx+thumb+sfx;
 var q=item.q||item.qty||1;
 h+='<div class="order-item">';
-h+='<div class="order-num">'+(i+1)+'</div>';
+h+='<div class="order-num">#'+(i+1)+'</div>';
+if(thumb)h+='<img class="order-img" src="'+thumb+'" alt="">';
 h+='<div class="order-info">';
 h+='<div class="order-title">'+title+'</div>';
 if(q>1)h+='<div class="order-qty">Qty: '+q+'</div>';
