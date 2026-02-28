@@ -4,40 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Order - NinaJewelryUSA</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#0a0a0a;--gold:#b8977e;--gold-light:#d4b9a0;--bg:#faf8f5;--border:#e8e2dc;--text:#1a1a1a;--text-light:#8a8a8a}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased}
-.header{background:var(--primary);padding:3rem 2rem;text-align:center;color:#fff;position:relative}
-.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent)}
-.header h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;letter-spacing:3px}
-.header h1 span{color:var(--gold-light)}
-.header p{font-family:'Cormorant Garamond',serif;opacity:.6;font-size:1rem;margin-top:.5rem;letter-spacing:2px;font-weight:300}
+:root{--pink:#f8a4c8;--pink-light:#fce4ec;--pink-dark:#e91e8c;--pink-soft:#fff0f5;--text:#4a3347;--text-light:#b08da0;--border:#f5dde8;--bg:#fff8fa}
+body{font-family:'Quicksand',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-weight:400}
+.header{background:linear-gradient(135deg,#fff0f5,#fce4ec,#f3e5f5);padding:2.5rem 2rem;text-align:center;position:relative}
+.header::after{content:'🎀 🍋 🦋';position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:.9rem;opacity:.4}
+.header h1{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:500;color:var(--text)}
+.header h1 span{color:var(--pink)}
+.header p{color:var(--text-light);font-size:.9rem;margin-top:.3rem}
 .container{max-width:600px;margin:0 auto;padding:2rem 1.5rem}
-.order-item{display:flex;align-items:center;gap:1rem;padding:1rem;margin-bottom:.75rem;background:#fff;border-radius:10px;border:1px solid var(--border)}
-.order-num{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);font-weight:500;min-width:28px}
-.order-img{width:70px;height:70px;object-fit:cover;border-radius:8px;flex-shrink:0}
+.order-item{display:flex;align-items:center;gap:1rem;padding:1rem;margin-bottom:.75rem;background:#fff;border-radius:14px;border:1px solid var(--border);transition:all .2s}
+.order-item:hover{border-color:var(--pink);box-shadow:0 4px 15px rgba(248,164,200,.12)}
+.order-num{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--pink);font-weight:500;min-width:28px}
+.order-img{width:65px;height:65px;object-fit:cover;border-radius:10px;flex-shrink:0}
 .order-info{flex:1}
-.order-title{font-size:.88rem;font-weight:400;letter-spacing:.3px}
+.order-title{font-size:.85rem;font-weight:500}
 .order-qty{font-size:.75rem;color:var(--text-light);margin-top:.2rem}
-.summary{background:var(--primary);color:#fff;border-radius:8px;padding:2rem;text-align:center;margin-top:2rem}
-.summary h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.5rem;color:var(--gold-light);letter-spacing:2px}
-.summary p{font-size:.85rem;opacity:.6;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
-.wa-order{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:.75rem 2.5rem;border-radius:50px;font-size:.8rem;font-weight:500;margin-top:1.5rem;text-decoration:none;transition:all .3s;letter-spacing:1px;text-transform:uppercase;font-family:'Inter',sans-serif}
-.wa-order:hover{background:var(--gold-light);transform:translateY(-2px)}
-.back{display:inline-block;margin-top:1.2rem;color:var(--gold);font-size:.8rem;text-decoration:none;letter-spacing:1px}
+.summary{background:linear-gradient(135deg,#4a3347,#5c3d5e);color:#fff;border-radius:16px;padding:2rem;text-align:center;margin-top:2rem}
+.summary h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.5rem;color:var(--pink-light)}
+.summary p{font-size:.85rem;opacity:.6}
+.wa-order{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--pink),#f48fb1);color:#fff;padding:.75rem 2.5rem;border-radius:50px;font-size:.8rem;font-weight:600;margin-top:1.5rem;text-decoration:none;transition:all .3s}
+.wa-order:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(248,164,200,.4)}
+.back{display:inline-block;margin-top:1rem;color:var(--pink-light);font-size:.8rem;text-decoration:none}
 .back:hover{text-decoration:underline}
-.empty{text-align:center;padding:4rem 2rem;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:1px}
-.empty a{color:var(--gold);text-decoration:none}
+.empty{text-align:center;padding:4rem 2rem;color:var(--text-light);font-size:.95rem}
+.empty a{color:var(--pink);text-decoration:none}
 .empty a:hover{text-decoration:underline}
-@media(max-width:600px){.order-img{width:56px;height:56px}.order-title{font-size:.82rem}}
+@media(max-width:600px){.order-img{width:52px;height:52px}.order-title{font-size:.8rem}}
 </style>
 </head>
 <body>
 <div class="header">
 <h1>Nina<span>Jewelry</span>USA</h1>
-<p>Order Summary</p>
+<p>✨ Order Summary</p>
 </div>
 <div class="container" id="content">
 <div class="empty">Loading...</div>
@@ -69,14 +70,14 @@ if(q>1)h+='<div class="order-qty">Qty: '+q+'</div>';
 h+='</div></div>';
 });
 h+='<div class="summary">';
-h+='<h2>'+totalQty+' Item'+(totalQty>1?'s':'')+' Selected</h2>';
+h+='<h2>🎀 '+totalQty+' Item'+(totalQty>1?'s':'')+' Selected</h2>';
 h+='<p>Contact us to place your order</p>';
-h+='<a href="https://wa.me/8613928692115" class="wa-order" target="_blank">Chat on WhatsApp</a>';
+h+='<a href="https://wa.me/8613928692115" class="wa-order" target="_blank">💬 Chat on WhatsApp</a>';
 h+='<br><a href="index.html" class="back">Continue Shopping →</a>';
 h+='</div>';
 document.getElementById('content').innerHTML=h;
 }catch(e){
-document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><br><small style="color:#ccc;word-break:break-all">Debug: hash='+hash.substring(0,50)+'... err='+e+'</small><br><br><a href="index.html">← Go to Shop</a></div>';
+document.getElementById('content').innerHTML='<div class="empty">Cart is empty or link is invalid.<br><br><small style="color:#ddd;word-break:break-all">hash='+String(hash||'').substring(0,30)+' err='+e+'</small><br><br><a href="index.html">← Go to Shop</a></div>';
 }
 </script>
 </body>
