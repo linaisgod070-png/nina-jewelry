@@ -46,8 +46,10 @@ body{font-family:'Quicksand',-apple-system,sans-serif;background:var(--bg);color
 <script>
 try{
 var hash=window.location.hash.substring(1);
-if(!hash)throw 'no data';
-var b64=hash.replace(/-/g,'+').replace(/_/g,'/');
+var params=new URLSearchParams(window.location.search);
+var data=params.get('d')||hash;
+if(!data)throw 'no data';
+var b64=data.replace(/-/g,'+').replace(/_/g,'/');
 while(b64.length%4)b64+='=';
 var json=decodeURIComponent(escape(atob(b64)));
 var items=JSON.parse(json);
