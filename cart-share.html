@@ -51,11 +51,11 @@ var json=decodeURIComponent(escape(atob(b64)));
 var items=JSON.parse(json);
 if(!items||!items.length)throw 'empty';
 var h='';
-var totalQty=items.reduce(function(s,x){return s+(x.qty||1)},0);
+var totalQty=items.reduce(function(s,x){return s+(x.q||1)},0);
 items.forEach(function(item,i){
-var title=item.title||'Product';
-var thumb=item.thumb||'';
-var q=item.qty||1;
+var title=item.t||item.title||'Product';
+var thumb=item.p||item.thumb||'';
+var q=item.q||item.qty||1;
 h+='<div class="cart-item">';
 if(thumb)h+='<img src="'+thumb+'" alt="">';
 h+='<div class="cart-item-info">';
